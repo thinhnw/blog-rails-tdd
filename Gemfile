@@ -63,3 +63,7 @@ end
 
 gem "factory_bot_rails"
 gem "bootstrap"
+
+gem "bcrypt", "~> 3.1"
+
+gem "activeadmin", "~> 3.2"
