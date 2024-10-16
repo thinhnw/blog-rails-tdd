@@ -67,3 +67,5 @@ gem "bootstrap"
 gem "bcrypt", "~> 3.1"
 
 gem "activeadmin", "~> 3.2"
+
+gem "sassc-rails", "~> 2.1"

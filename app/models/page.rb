@@ -45,6 +45,10 @@ class Page < ApplicationRecord
     ActiveRecord::Base.connection.execute(sql)
   end
 
+  def tags_string_for_form
+    tags.ordered.map(&:name).join(", ")
+  end
+
   private
 
   def make_slug

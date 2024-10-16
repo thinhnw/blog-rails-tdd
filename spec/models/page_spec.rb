@@ -126,4 +126,19 @@ RSpec.describe Page, type: :model do
       end
     end
   end
+
+  describe "#tags_string_for_form" do
+    let(:tag) { create(:tag, name: "foo") }
+    let(:tag2) { create(:tag, name: "bar") }
+    let(:page) { create(:page, :published) }
+
+    before do
+      create(:page_tag, page:, tag:)
+      create(:page_tag, page:, tag: tag2)
+    end
+
+    it "returns the tags in the comma delimited format" do
+      expect(page.tags_string_for_form).to eq("bar, foo")
+    end
+  end
 end

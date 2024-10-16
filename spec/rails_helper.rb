@@ -65,6 +65,22 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  #
+  config.before(:each, type: :system) do
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--no-sandbox') # Add the --no-sandbox argument
+    options.add_argument('--disable-gpu') # Optional: Disable GPU hardware acceleration
+    options.add_argument('--headless') # Uncomment if running headless
+    options.add_argument('--window-size=1920,1080') # Set a size for the headless browser
+
+    Capybara.register_driver :custom_selenium do |app|
+      Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+    end
+
+    # Use the appropriate driver based on the environment variable
+    driver = ENV['SHOW_CHROME'] ? :selenium_chrome : :custom_selenium
+    driven_by(driver)
+  end
 end
 
 Shoulda::Matchers.configure do |config|
@@ -73,3 +89,5 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+require "#{Rails.root}/spec/support/login.rb"

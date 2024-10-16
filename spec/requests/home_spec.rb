@@ -7,4 +7,9 @@ RSpec.describe "Homes", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET /sitemap" do
+    it "returns http success" do
+    end
+  end
 end
